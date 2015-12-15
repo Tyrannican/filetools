@@ -17,7 +17,7 @@ def is_subdir(path, directory):
 
 
 class File(object):
-    def __init__(self, filepath, refpath):
+    def __init__(self, filepath, refpath='.'):
         self.refpath = os.path.abspath(refpath)
         if os.path.isabs(filepath):
             self.path = os.path.normpath(filepath)
