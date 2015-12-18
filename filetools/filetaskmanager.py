@@ -4,7 +4,7 @@ import fnmatch
 import threading
 
 from filetools import File
-
+from filetools import list_files
 
 class FileTaskManager(threading.Thread):
 
@@ -29,7 +29,9 @@ class FileTaskManager(threading.Thread):
                     for task in self.tasks:
                         for pattern in task['patterns']:
                             if fnmatch.fnmatch(filename, pattern):
-                                matched_file = File(self.ref_path, filename)
+                                filedir = os.path.abspath(dirpath)
+                                filepath = os.path.join(filedir, filename)
+                                matched_file = File(filepath, self.ref_path)
                                 if not task['ignore_function'](matched_file):
                                     task['callback'](matched_file)
             time.sleep(self.screening_sleep_time)
