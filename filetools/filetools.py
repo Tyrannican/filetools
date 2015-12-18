@@ -1,5 +1,5 @@
 import os
-
+import fnmatch
 
 def ensure_dir(file):
     if not os.path.exists(file.dirname):
@@ -16,9 +16,30 @@ def is_subdir(path, directory):
         return True
 
 
+def list_files(path='.', patterns=['*'], min_depth=0, max_depth=float('inf')):
+    if type(patterns) == str:
+        patterns = [patterns]
+    found_files = []
+    for (dirpath, dirnames, filenames) in os.walk(path):
+        for filename in filenames:
+            filedir = os.path.abspath(dirpath)
+            filepath = os.path.join(filedir, filename)
+            depth = filepath[len(os.path.abspath(path)) + len(os.path.sep):].count(os.path.sep)
+            if min_depth <= depth <= max_depth:
+                for pattern in patterns:
+                    if fnmatch.fnmatch(filename, pattern):
+                        found_files.append(filepath)
+    return found_files
+
+
+def list_folders(path='.'):
+    paths = [os.path.abspath(os.path.normpath(os.path.join(path, x))) for x in os.listdir(path)]
+    return filter(lambda x: os.path.isdir(x), paths)
+
+
 class File(object):
     def __init__(self, filepath, refpath='.'):
-        self.refpath = os.path.abspath(refpath)
+        self.refpath = os.path.abspath(os.path.normpath(refpath))
         if os.path.isabs(filepath):
             self.path = os.path.normpath(filepath)
         else:
