@@ -1,3 +1,4 @@
+import os
 import time
 import uuid
 
@@ -21,6 +22,7 @@ def generate_n_digit_name(number, n_digit=4, extension=''):
 
 
 def generate_incremental_filename(folderpath='.', extension='', n_digit=4):
+    folderpath = os.path.abspath(folderpath)
     found_files = list_files(folderpath, '*' + extension, max_depth=0)
 
     current_max = -1
@@ -30,10 +32,12 @@ def generate_incremental_filename(folderpath='.', extension='', n_digit=4):
             count = int(basename)
             if count > current_max:
                 current_max = count
-    return generate_n_digit_name(current_max + 1, n_digit, extension)
+    fname = generate_n_digit_name(current_max + 1, n_digit, extension)
+    return os.path.join(folderpath, fname)
 
 
 def generate_incremental_foldername(folderpath='.', n_digit=4):
+    folderpath = os.path.abspath(folderpath)
     found_folders = list_folders(folderpath)
 
     current_max = -1
@@ -43,4 +47,5 @@ def generate_incremental_foldername(folderpath='.', n_digit=4):
             count = int(basename)
             if count > current_max:
                 current_max = count
-    return generate_n_digit_name(current_max + 1, n_digit)
+    fname = generate_n_digit_name(current_max + 1, n_digit)
+    return os.path.join(folderpath, fname)
