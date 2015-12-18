@@ -1,9 +1,9 @@
 import os
 import fnmatch
 
-def ensure_dir(file):
-    if not os.path.exists(file.dirname):
-        os.makedirs(file.dirname)
+def ensure_dir(dirname):
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
 
 
 def is_subdir(path, directory):
@@ -121,11 +121,11 @@ class File(object):
         return data
 
     def write(self, data):
-        ensure_dir(self)
+        ensure_dir(self.dirname)
         with open(self.path, 'w') as f:
             f.write(data)
 
     def append(self, data):
-        ensure_dir(self)
+        ensure_dir(self.dirname)
         with open(self.path, 'a') as f:
             f.write(data)
