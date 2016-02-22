@@ -1,6 +1,7 @@
 import os
 import fnmatch
 
+
 def ensure_dir(dirname):
     if not os.path.exists(dirname):
         os.makedirs(dirname)

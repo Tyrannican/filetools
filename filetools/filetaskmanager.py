@@ -4,7 +4,7 @@ import fnmatch
 import threading
 
 from filetools import File
-from filetools import list_files
+
 
 class FileTaskManager(threading.Thread):
 

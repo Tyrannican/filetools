@@ -5,6 +5,7 @@ import uuid
 from filetools import File
 from filetools import list_files
 from filetools import list_folders
+from filetools import ensure_dir
 
 
 def generate_timestamped_name(extension='', fname=None, fmt='%d_%m_%Y_%Hh%Mm%Ss'):
@@ -21,8 +22,11 @@ def generate_n_digit_name(number, n_digit=4, extension=''):
     return str(number).zfill(n_digit) + extension
 
 
-def generate_incremental_filename(folderpath='.', extension='', n_digit=4):
+def generate_incremental_filename(folderpath='.', extension='', n_digit=4, create_dir=True):
     folderpath = os.path.abspath(folderpath)
+    if create_dir:
+        ensure_dir(folderpath)
+
     found_files = list_files(folderpath, '*' + extension, max_depth=0)
 
     current_max = -1
@@ -36,8 +40,11 @@ def generate_incremental_filename(folderpath='.', extension='', n_digit=4):
     return os.path.join(folderpath, fname)
 
 
-def generate_incremental_foldername(folderpath='.', n_digit=4):
+def generate_incremental_foldername(folderpath='.', n_digit=4, create_dir=True):
     folderpath = os.path.abspath(folderpath)
+    if create_dir:
+        ensure_dir(folderpath)
+
     found_folders = list_folders(folderpath)
 
     current_max = -1

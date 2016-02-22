@@ -1,5 +1,3 @@
-import os
-
 from filetools import FileTaskManager
 
 
