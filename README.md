@@ -41,3 +41,5 @@ folders = filehelper.list_folders('/home/user', recursive=True)
 All of the work and vision was developed by Jonathan Grizou.
 
 Graham Keenan updated the code to Python3 and removed the dependency on `os` and replace with `pathlib`
+
+Codebase is currently maintained by Graham Keenan
