@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Callable, List
 
 # Filetoosl improts
-from filetools import list_files
+from .filehelpers import list_files
 
 class FileTaskManager(threading.Thread):
     """Class for managing Tasks to perform on files in a given directory

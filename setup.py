@@ -5,8 +5,8 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / 'README.md').read_text()
 
 setup(
-    name="filetools",
-    version="1.0.0",
+    name="filehelper",
+    version="1.0.1",
     description="Helper functions to manage files",
     long_description=README,
     long_description_content_type='text/markdown',
