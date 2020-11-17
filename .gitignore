@@ -1,4 +1,4 @@
-filetools.egg-info
+filehelper.egg-info
 *.pyc
 __pycache__/
 build/
